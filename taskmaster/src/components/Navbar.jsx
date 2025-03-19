@@ -1,24 +1,38 @@
-import React from "react";
-import { Flex, Button, Text, Link } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
+// src/components/Navbar.jsx
+import { Link } from "react-router-dom";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (u) => {
+      setUser(u);
+    });
+  }, []);
+
+  const handleLogout = () => {
+    const auth = getAuth();
+    signOut(auth);
+  };
+
   return (
-    <Flex bg="blue.500" p={4} color="white" justifyContent="space-between">
-      <Text fontSize="xl" fontWeight="bold">
-        TaskMaster
-      </Text>
-      <Flex gap={4}>
-        <Button as={RouterLink} to="/" colorScheme="teal">
-          Home
-        </Button>
-        <Button as={RouterLink} to="/tasks" colorScheme="teal">
-          Tasks
-        </Button>
-        <Button colorScheme="teal">Login</Button>
-        <Button colorScheme="teal">Register</Button>
-      </Flex>
-    </Flex>
+    <nav className="bg-white shadow-md p-4 flex justify-between items-center">
+      <Link to="/" className="text-2xl font-bold text-blue-600">TaskMaster</Link>
+      <div className="flex gap-4 items-center">
+        <Link to="/">Home</Link>
+        {user && <Link to="/profile">Profile</Link>}
+        {!user && <Link to="/login" className="text-blue-500">Login</Link>}
+        {!user && <Link to="/signup" className="text-blue-500">Signup</Link>}
+        {user && (
+          <button onClick={handleLogout} className="bg-red-500 text-white px-3 py-1 rounded">
+            Logout
+          </button>
+        )}
+      </div>
+    </nav>
   );
 };
 

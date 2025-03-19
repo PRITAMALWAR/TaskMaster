@@ -1,19 +1,22 @@
-import React from "react";
+// src/App.jsx
 import { Routes, Route } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
-import Tasks from "./pages/Tasks";
-import Home from "./pages/Tasks"; 
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
-      <Box>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} /> 
-          <Route path="/tasks" element={<Tasks />} />
-        </Routes>
-      </Box>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+      </>
   );
 };
 

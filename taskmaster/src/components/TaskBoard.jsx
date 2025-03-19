@@ -1,39 +1,37 @@
-import React, { useState } from "react";
-import { Flex, Text, Box } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import TaskForm from "./TaskForm";
 import TaskItem from "./TaskItem";
-import initialTasks from "../data/tasks"; 
 
 const TaskBoard = () => {
-  const [tasks, setTasks] = useState(initialTasks); 
+  const [tasks, setTasks] = useState({});
 
-  const handleDelete = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+  const fetchTasks = async () => {
+    const res = await fetch('https://taskmaster-444af-default-rtdb.firebaseio.com/tasks.json');
+    const data = await res.json();
+    setTasks(data || {});
   };
 
-  const handleEdit = (id) => {
-    console.log("Edit task with ID:", id);
-  };
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const getTasksByStatus = (status) =>
+    Object.entries(tasks).filter(([_, task]) => task.status === status);
 
   return (
-    <Flex gap={4}>
-      {["To-Do", "In Progress", "Completed"].map((status) => (
-        <Box key={status} flex={1}>
-          <Text fontSize="xl" fontWeight="bold" mb={4}>
-            {status}
-          </Text>
-          {tasks
-            .filter((task) => task.status === status)
-            .map((task) => (
-              <TaskItem
-                key={task.id}
-                task={task}
-                onDelete={handleDelete}
-                onEdit={handleEdit}
-              />
+    <div className="p-6">
+      <TaskForm fetchTasks={fetchTasks} />
+      <div className="grid md:grid-cols-3 gap-4 mt-6">
+        {["To-Do", "In Progress", "Completed"].map((status) => (
+          <div key={status}>
+            <h3 className="text-xl font-bold mb-2">{status}</h3>
+            {getTasksByStatus(status).map(([id, task]) => (
+              <TaskItem key={id} task={task} taskId={id} fetchTasks={fetchTasks} />
             ))}
-        </Box>
-      ))}
-    </Flex>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
