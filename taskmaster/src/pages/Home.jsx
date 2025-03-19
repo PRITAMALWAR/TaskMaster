@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import React, { useState, useEffect } from "react";
 import TaskBoard from "../components/TaskBoard";
 import { db } from "../firebase";

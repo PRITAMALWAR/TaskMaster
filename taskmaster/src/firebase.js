@@ -1,4 +1,3 @@
-// src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
@@ -14,9 +13,7 @@ const firebaseConfig = {
   measurementId: "G-6QWD0N6X36"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Export these to use in all pages
 export const auth = getAuth(app);
 export const db = getDatabase(app);

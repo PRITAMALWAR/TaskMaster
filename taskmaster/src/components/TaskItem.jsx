@@ -1,4 +1,3 @@
-// src/components/Tasks/TaskItem.jsx
 const TaskItem = ({ task, taskId, fetchTasks }) => {
     const handleDelete = async () => {
       await fetch(`https://taskmaster-444af-default-rtdb.firebaseio.com/tasks/${taskId}.json`, {
