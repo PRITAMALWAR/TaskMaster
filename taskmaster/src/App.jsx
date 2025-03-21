@@ -22,6 +22,7 @@ const App = () => {
 
   return (
     <>
+
       <Navbar user={user} />
       <Routes>
         <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/taskitem/:id" element={user ? <TaskItem /> : <Navigate to="/login" />} />
         <Route path="/taskform" element={user ? <TaskForm /> : <Navigate to="/login" />} />
       </Routes>
+      
     </>
   );
 };
