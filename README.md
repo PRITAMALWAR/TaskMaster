@@ -3,7 +3,7 @@
 
 ## 🚀 Project Overview
 
-TaskMaster is a modern task management web application that helps users efficiently organize, collaborate, and track their tasks. With features like task boards, deadline management, AI-based predictions, and real-time collaboration, TaskMaster takes task management to the next level. It uses a Kanban-style board for task categorization and offers intuitive functionalities to keep you on top of your work.
+TaskMaster is a modern task management web application that helps users efficiently organize, collaborate, and track their tasks. With features like task boards, deadline management, and real-time collaboration, TaskMaster takes task management to the next level. It uses a Kanban-style board for task categorization and offers intuitive functionalities to keep you on top of your work.
 
 You can create, update, delete, and manage tasks with ease, collaborate with your team, and receive reminders for deadlines. The app is fully responsive and provides a sleek, dark mode experience for a modern look.
 
